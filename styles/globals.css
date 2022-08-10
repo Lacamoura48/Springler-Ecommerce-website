@@ -10,8 +10,9 @@ body {
   margin: 0;
   font-family: 'Lato';
   font-weight: 300;
-  background-color: rgb(60, 89, 59);
   color : white;
-
+}
+h1 {
+  font-family: 'Yeseva One' !important;
 }
 

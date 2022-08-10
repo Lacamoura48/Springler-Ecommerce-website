@@ -5,7 +5,13 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'Lato': ['Lato', 'system-ui'],
+      'Yeseva': ['"Yeseva One"'],
+    },
+    extend: {
+
+    },
   },
   plugins: [],
 }

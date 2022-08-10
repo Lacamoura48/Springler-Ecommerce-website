@@ -12,7 +12,7 @@ export default function Document() {
           crossorigin
         ></link>
         <link
-          href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Yeseva+One&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Yeseva+One&display=swap"
           rel="stylesheet"
         ></link>
       </Head>

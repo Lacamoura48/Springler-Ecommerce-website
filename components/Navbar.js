@@ -3,18 +3,21 @@ import Link from "next/link";
 
 function Navbar() {
   return (
-    <nav className="flex pt-1  items-center justify-between px-36">
+    <nav className="flex pt-1  items-center justify-between px-36 fixed top-0 w-full z-20">
       <div className="flex items-center">
         <img className="w-36 pt-3 mr-16" src="/logo.svg" alt="" />
         <ul className="flex gap-10 text-[18px]">
-          <li>
+          <li className="relative group">
             <Link href="/">Home</Link>
+            <span className="w-0 h-[2px] bg-white absolute top-7 left-0 group-hover:w-1/2 transition-all"></span>
           </li>
-          <li>
+          <li className="relative group">
             <Link href="/">plants</Link>
+            <span className="w-0 h-[2px] bg-white absolute top-7 left-0 group-hover:w-1/2 transition-all"></span>
           </li>
-          <li>
+          <li className="relative group">
             <Link href="/">about</Link>
+            <span className="w-0 h-[2px] bg-white absolute top-7 left-0 group-hover:w-1/2 transition-all"></span>
           </li>
         </ul>
       </div>
@@ -27,7 +30,7 @@ function Navbar() {
             alt=""
           />
           <input
-            class="h-12 w-full pl-12 pr-20 bg-[#d9d9d927] appearance-none border-gray-200 rounded-full py-2 px-4 text-white leading-tight focus:outline-none focus:bg-[#d9d9d941] hover:bg-[#d9d9d941] focus:border-none"
+            class="h-12 w-full transition-all pl-12 pr-20 bg-[#d9d9d927] appearance-none border-gray-200 rounded-full py-2 px-4 text-white leading-tight focus:outline-none focus:bg-[#d9d9d941] hover:bg-[#d9d9d941] focus:border-none"
             id="inline-full-name"
             type="text"
             placeholder="Search"
