@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Hero from '../components/Home/Hero'
+import TopSelling from '../components/Home/TopSelling'
 import Layout from '../components/Layout'
 
 
@@ -13,6 +14,7 @@ export default function Home() {
     <div>
       <Layout>
           <Hero />
+          <TopSelling />
       </Layout>
     </div>
       

@@ -1,23 +1,43 @@
 import React from "react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+
+
 
 function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const changeBackground = () => {
+    
+    if (window.scrollY >= 100) {
+      setScrolled(true)
+    } else {
+      setScrolled(false)
+    }
+  }
+  useEffect(() => {
+    
+    
+    // adding the event when scroll change Logo
+    window.addEventListener("scroll", changeBackground)
+    changeBackground()
+  })
+
   return (
-    <nav className="flex pt-1  items-center justify-between px-36 fixed top-0 w-full z-20">
+    <nav className={`flex  items-center justify-between px-48 fixed top-0 w-full z-20 ${scrolled && 'bg-[#ffffff]'} transition-all`}>
       <div className="flex items-center">
-        <img className="w-36 pt-3 mr-16" src="/logo.svg" alt="" />
+        {scrolled ? (<img className="w-36 pt-3 mr-16" src="/logoTwo.svg" alt="" />) : (<img className="w-36 pt-3 mr-16" src="/logo.svg" alt="" />)}
         <ul className="flex gap-10 text-[18px]">
-          <li className="relative group">
+          <li className={`relative group ${scrolled && 'text-black'}`}>
             <Link href="/">Home</Link>
-            <span className="w-0 h-[2px] bg-white absolute top-7 left-0 group-hover:w-1/2 transition-all"></span>
+            <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
-          <li className="relative group">
+          <li className={`relative group ${scrolled && 'text-black'}`}>
             <Link href="/">plants</Link>
-            <span className="w-0 h-[2px] bg-white absolute top-7 left-0 group-hover:w-1/2 transition-all"></span>
+            <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
-          <li className="relative group">
+          <li className={`relative group ${scrolled && 'text-black'}`}>
             <Link href="/">about</Link>
-            <span className="w-0 h-[2px] bg-white absolute top-7 left-0 group-hover:w-1/2 transition-all"></span>
+            <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
         </ul>
       </div>
@@ -26,24 +46,24 @@ function Navbar() {
         <div className="w-80 relative">
           <img
             className="w-6 absolute top-3 left-3"
-            src="/icons/search-icon.svg"
+            src={scrolled ? "/icons/search-icon-black.svg":"/icons/search-icon.svg"}
             alt=""
           />
           <input
-            class="h-12 w-full transition-all pl-12 pr-20 bg-[#d9d9d927] appearance-none border-gray-200 rounded-full py-2 px-4 text-white leading-tight focus:outline-none focus:bg-[#d9d9d941] hover:bg-[#d9d9d941] focus:border-none"
+            className={`h-12 w-full transition-all pl-12 pr-20 appearance-none  rounded-full py-2 px-4  leading-tight focus:outline-none bg-[#d9d9d927] border-gray-200 ${scrolled ? 'text-black':'text-white'} focus:bg-[#d9d9d941] hover:bg-[#d9d9d941] focus:border-none`}
             id="inline-full-name"
             type="text"
             placeholder="Search"
           />
-          <button className="bg-[#d9d9d941] hover:bg-[#d9d9d948] text-white py-2 px-3 rounded-full absolute right-1 top-1 text-[15px]">
+          <button className={` ${scrolled ? 'text-gray-700 bg-[#bcbcbc41] hover:bg-[#aaaaaa48]': 'text-white bg-[#d9d9d941] hover:bg-[#d9d9d948]'} py-2 px-3 rounded-full absolute right-1 top-1 text-[15px]`}>
             Search
           </button>
         </div>
-        <div className="w-11 h-11 ml-5 border-[0.7px] rounded-full p-3 hover:bg-[#ffffff2c] transition">
-          <img className="w-7" src="/icons/user-icon.svg" alt="" />
+        <div className={`w-11 h-11 ml-5 border-[0.7px] rounded-full p-3 ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} transition`}>
+          <img className="w-7" src={scrolled ? '/icons/user-icon-black.svg' : "/icons/user-icon.svg"} alt="" />
         </div>
-        <div className="w-11 h-11 border-[0.7px] rounded-full p-3 hover:bg-[#ffffff2c] transition">
-          <img className="w-7" src="/icons/cart-icon.svg" alt="" />
+        <div className={`w-11 h-11 border-[0.7px] rounded-full p-3 transition ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'}`}>
+          <img className="w-7" src={scrolled ? '/icons/cart-icon-black.svg' : "/icons/cart-icon.svg"} alt="" />
         </div>
       </div>
     </nav>

@@ -5,8 +5,8 @@ function Layout({ children }) {
   return (
     <>
       
-        <header>
-            <Navbar />
+        <header >
+            <Navbar/>
         </header>
         <main>
             {children}
