@@ -8,14 +8,14 @@ function HeroDiaporama() {
   const plants = [
     {id : 0,
       src : "images/plant_cut_3.png",
-      style : 'w-60 absolute -top-10 left-14 z-40',
+      style : 'w-60 absolute -top-10 left-14 z-40 pointer-events-none	',
       title : "Susie",
       price : "15.99$"},
       
     
     { id:1,
       src : "images/plant_cut_4.png",
-      style : 'w-[470px] absolute -top-20 -left-20 z-40',
+      style : 'w-[470px] absolute -top-20 -left-20 z-40 pointer-events-none	',
       title : "Pippa",
       price : "29.99$"}
   ]
@@ -67,14 +67,14 @@ function previousButton(){
        <div className='absolute w-[530px] h-[530px] bg-white opacity-30 rounded-full -bottom-3 -left-5'></div>
     {plants.map((item, index)=>{
         
-           return <AnimatePresence  key={item.key}> {current === item.id && (<motion.img  initial={{opacity : 0, x: -120, y:0, scale: 0.5}} animate={{opacity : 1,x: 0, y:0, scale: 1}} exit={{opacity : 0,  x: 100, y:0, scale: 0.5}} transition={{duration: 0.8, ease: "anticipate"}}  className={item.style} src={item.src} alt=""/>)}</AnimatePresence>
+           return <AnimatePresence  key={item.title}> {current === item.id && (<motion.img  initial={{opacity : 0, x: -120, y:0, scale: 0.5}} animate={{opacity : 1,x: 0, y:0, scale: 1}} exit={{opacity : 0,  x: 100, y:0, scale: 0.5}} transition={{duration: 0.8, ease: "anticipate"}}  className={item.style} src={item.src} alt=""/>)}</AnimatePresence>
     })}
      
        <span className='w-36 h-10 bg-[#00000080] absolute top-[430px] left-[120px] blur-xl z-30'></span>
        <div className='absolute right-28 top-[210px] text-black'>
        {plants.map((item, index)=>{
         
-        return (current === item.id && <motion.h1 initial={{opacity : 0, x : -5}} animate={{opacity : 1, x : 0}} exit={{opacity : 0}} transition={{duration : 0.5, ease: "easeOut"}} className='text-5xl mb-1' key={item.id}>{item.title}</motion.h1>)
+        return (current === item.id && <motion.h1 key={item.id} initial={{opacity : 0, x : -5}} animate={{opacity : 1, x : 0}} exit={{opacity : 0}} transition={{duration : 0.5, ease: "easeOut"}} className='text-5xl mb-1'>{item.title}</motion.h1>)
  })}
        
         <motion.p initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} transition={{duration : 2}} className='text-2xl text-[#737373] mb-12'>{plants[current].price}</motion.p>
