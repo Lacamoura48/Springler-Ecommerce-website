@@ -23,7 +23,7 @@ function Navbar() {
   })
 
   return (
-    <nav className={`flex  items-center justify-between px-48 fixed top-0 w-full z-20 ${scrolled && 'bg-[#ffffff]'} transition-all`}>
+    <nav className={`flex  items-center justify-between px-48 fixed top-0 w-full z-20 ${scrolled && 'bg-[#ffffff] shadow-md'} transition-all`}>
       <div className="flex items-center">
         {scrolled ? (<img className="w-36 pt-3 mr-16" src="/logoTwo.svg" alt="" />) : (<img className="w-36 pt-3 mr-16" src="/logo.svg" alt="" />)}
         <ul className="flex gap-10 text-[18px]">
