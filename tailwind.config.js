@@ -10,7 +10,7 @@ module.exports = {
       'Yeseva': ['"Yeseva One"'],
     },
     extend: {
-
+    
     },
   },
   plugins: [],
