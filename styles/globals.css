@@ -1,7 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
 
 
 html,
@@ -18,4 +24,5 @@ h1 {
 .yoyo {
   font-family: 'Yeseva One' !important;
 }
+
 
