@@ -4,17 +4,18 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <title>Springler</title>
+        
         <link rel="preconnect" href="https://fonts.googleapis.com"></link>
         <link
           rel="preconnect"
           href="https://fonts.gstatic.com"
-          crossorigin
+          crossOrigin
         ></link>
         <link
           href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&family=Yeseva+One&display=swap"
           rel="stylesheet"
         ></link>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>
         <Main />

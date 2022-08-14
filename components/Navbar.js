@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import {cartActions} from '../slices/cartSlice';
 import { useDispatch } from "react-redux";
+import {useRouter} from 'next/router'
 
 
 
@@ -11,11 +12,13 @@ import { useDispatch } from "react-redux";
 
 
 function Navbar() {
+  const router = useRouter()
 
+ 
   const [scrolled, setScrolled] = useState(false);
   const changeBackground = () => {
     
-    if (window.scrollY >= 100) {
+    if (window.scrollY >= 100 || router.pathname != "/" ) {
       setScrolled(true)
     } else {
       setScrolled(false)
@@ -42,7 +45,7 @@ function Navbar() {
             <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
           <li className={`relative group ${scrolled && 'text-black'}`}>
-            <Link href="/">plants</Link>
+            <Link href="/plants">plants</Link>
             <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
           <li className={`relative group ${scrolled && 'text-black'}`}>

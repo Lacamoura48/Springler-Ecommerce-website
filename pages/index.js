@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Head>
         <title>Home | Springler</title>
-        <link rel="icon" href="/favicon.ico" />
+       
       </Head>
     <div>
       <Layout>
