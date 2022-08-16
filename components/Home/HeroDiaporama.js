@@ -60,7 +60,7 @@ function previousButton(){
   return (
     
     
-    <div className='relative w-[600px] h-[600px] bg-white rounded-full z-20 mr-50'>
+    <div className='relative w-[600px] h-[600px] bg-white rounded-full z-20 mr-50 seconde:block hidden'>
         <motion.button  className='cursor-pointer w-24 absolute right-0 top-[260px] z-30'><img className='w-full' src="icons/arrow-icon.svg" alt="" onClick={nextButton}/></motion.button>
         <motion.button className='cursor-pointer w-24 absolute left-0 top-[260px] rotate-180 z-30'><img className='w-full' src="icons/arrow-icon.svg" alt="" onClick={previousButton}/></motion.button>
        <div className='absolute w-[500px] h-[500px] bg-white opacity-30 rounded-full -top-2 -right-3'></div>

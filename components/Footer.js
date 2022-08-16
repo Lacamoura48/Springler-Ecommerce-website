@@ -7,7 +7,7 @@ function Footer() {
 
 
   return (
-    <div className='bg-[#6B7165] flex items-stretch relative overflow-hidden px-40 pt-5 pb-5'>
+    <div className='bg-[#6B7165] md:flex items-stretch relative overflow-hidden px-40 pt-5 pb-5 hidden'>
                 <img src="/images/plant_svg.svg" className='opacity-10 absolute w-52 right-0' alt="" />
 
         <div className='px-10 flex-1 flex flex-col items-start justify-start'>

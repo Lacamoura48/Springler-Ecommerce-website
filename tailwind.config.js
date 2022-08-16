@@ -13,6 +13,9 @@ module.exports = {
       flex :{
         '2' : '2 2 0%',
         '3' : '3 3 0%'
+      },
+      screens: {
+        'seconde' : '1304px'
       }
     },
   },

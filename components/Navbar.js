@@ -35,28 +35,28 @@ function Navbar() {
 
 
   return (
-    <nav className={`flex  items-center justify-between px-48 fixed top-0 w-full z-20 ${scrolled && 'bg-[#ffffff] shadow-md'} transition-all`}>
+    <nav className={`flex  items-center justify-between  md:px-48 px-5 fixed top-0 w-full z-20 ${scrolled && 'bg-[#ffffff] shadow-md'} transition-all`}>
       
       <div className="flex items-center">
         {scrolled ? (<img className="w-36 pt-2 mr-16" src="/logoTwo.svg" alt="" />) : (<img className="w-36 pt-2 mr-16" src="/logo.svg" alt="" />)}
-        <ul className="flex gap-10 text-[18px]">
-          <li className={`relative group ${scrolled && 'text-black'}`}>
+        <ul className="md:flex gap-16  text-[18px] tracking-widest hidden">
+          <li className={`relative group ${scrolled && 'text-black'} hover:opacity-100 ${router.pathname === "/" ? 'opacity-100 font-normal' : 'opacity-70'}`}>
             <Link href="/">Home</Link>
-            <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
+            <span className={`${router.pathname === "/" ? 'w-1/2' : 'w-0'} h-[1px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-[26px] left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
-          <li className={`relative group ${scrolled && 'text-black'}`}>
+          <li className={`relative group ${scrolled && 'text-black'} hover:opacity-100  ${router.pathname === "/plants" ? 'opacity-100 font-normal' : 'opacity-70'}`}>
             <Link href="/plants">plants</Link>
-            <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
+            <span className={`${router.pathname === "/plants" ? 'w-1/2' : 'w-0'}  h-[1px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-[26px] left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
-          <li className={`relative group ${scrolled && 'text-black'}`}>
+          <li className={`relative group ${scrolled && 'text-black'} hover:opacity-100  opacity-70`}>
             <Link href="/">about</Link>
-            <span className={`w-0 h-[2px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-7 left-0 group-hover:w-1/2 transition-all`}></span>
+            <span className={`w-0 h-[1px] ${scrolled ? 'bg-black' : 'bg-white'} absolute top-[26px] left-0 group-hover:w-1/2 transition-all`}></span>
           </li>
         </ul>
       </div>
 
       <div className="flex gap-5 items-center">
-        <div className="w-80 relative">
+        <div className="w-80 relative seconde:block hidden">
         
           <img
             className="w-6 absolute top-3 left-3"
@@ -69,7 +69,7 @@ function Navbar() {
             type="text"
             placeholder="Search"
           />
-          <button className={` ${scrolled ? 'text-gray-700 bg-[#bcbcbc41] hover:bg-[#aaaaaa48]': 'text-white bg-[#d9d9d941] hover:bg-[#d9d9d948]'} py-2 px-3 rounded-full absolute right-1 top-1 text-[15px] cursor-pointer`}>
+          <button className={` ${scrolled ? 'text-gray-700 bg-[#bcbcbc41] hover:bg-[#aaaaaa48]': 'text-white bg-[#d9d9d941] hover:bg-[#d9d9d948]'} py-2 px-3 rounded-full absolute right-1 top-1 text-[16px] cursor-pointer`}>
             Search
           </button>
         </div>

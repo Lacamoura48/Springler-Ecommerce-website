@@ -5,8 +5,11 @@ const cartInitialState ={
     cartItems : [
         {id : 1,
         title : "Susie"},
-        {id : 1,
+        {id : 2,
+        title : "9lwa"},
+        {id : 3,
         title : "Susie"},
+        
         
     ]
 }

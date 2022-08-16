@@ -19,6 +19,7 @@ function Layout({ children }) {
             <AnimatePresence>{cartShow && <Cart setShow={()=> dispatch(cartActions.showCart())} />}</AnimatePresence>
         </header>
         <main>
+          
             {children}
         </main>
         <footer>

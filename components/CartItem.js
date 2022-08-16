@@ -33,7 +33,7 @@ function CartItem({ item, variants }) {
       </div>
       <div className="flex flex-col justify-between items-end">
         <button className="transition hover:bg-[#7c7c7c2c] p-3 rounded-full"><img src="icons/trash-icon-black.svg" className="w-7" alt="" /></button>
-        <p className="font-bold text-lg">total : 19.99$</p>
+        <p className="ml-10 font-semibold text-lg">total : 19.99$</p>
         
       </div>
     </motion.div>

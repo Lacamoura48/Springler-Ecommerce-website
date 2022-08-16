@@ -8,19 +8,20 @@ function PhoneApp() {
     }
     const childrenVariantsL = {
         hidden : {opacity : 0, x : -100},
-        shown : {opacity : 1, x : 0 , transition : {duration : 0.4}}}
+        shown : {opacity : 1, x : 0 , transition : {duration : 0.4, delay: 0.3}}}
         
     
     const childrenVariantsR = {
         hidden : {opacity : 0, x : 100},
-        shown : {opacity : 1, x : 0 , transition : {duration : 0.4}}
+        shown : {opacity : 1, x : 0 , transition : {duration : 0.4, delay: 0.3}}
     }
   return (
-    <motion.div variants={parentVariants} initial="hidden" whileInView="shown" className='text-black flex justify-around items-center px-52 min-h-screen'>
-          <motion.div variants={childrenVariantsL} className='px-12  flex-1 pb-10'>
-            <h1 className='text-4xl mb-4'>subscribe in our email for more surprises !</h1>
+    <section>
+    <div className='text-black flex seconde:flex-row seconde:gap-0 gap-20 flex-col md:px-40 md:py-32 py-20 justify-center'>
+          <motion.div variants={childrenVariantsL} initial="hidden" whileInView="shown" className=' seconde:pr-12 seconde:border-r md:text-left text-center mx-auto'>
+            <h1 className=' text-2xl md:text-4xl mb-4'>subscribe in our email for more surprises !</h1>
             <p className='text-gray-400 mb-12 text-lg'>subscribe to the newsletter and get all news about new arrivals, sales, and even cupons  !</p>
-            <form className="w-96 relative">
+            <form className="w-96 relative ">
           <img
             className="w-6 absolute top-4 left-3"
             src="/icons/mail-icon-black.svg"
@@ -37,23 +38,27 @@ function PhoneApp() {
           </button>
         </form>
             </motion.div>
-        <motion.div variants={childrenVariantsR} className='border-l flex px-14 items-center gap-10 flex-1'>
+        <motion.div variants={childrenVariantsR} initial="hidden" whileInView="shown" className='flex gap-5 pl-12 md:justify-around'>
      
-            <div>
-            <h1 className='text-3xl mb-4'>Use our android app for a different shopping experience !</h1>
-            <p className='text-gray-400 mb-20'>Now you can bookmark and buy your favorite plants on your phone . it’s available on Playstore !</p>
-            <button className='text-white bg-[#7D916C] hover:bg-[#677759] transition text-lg px-4 py-4'>
+            <div className='w-1/2'>
+            <h1 className='text-xl md:text-4xl mb-4'>Use our android app for a different shopping experience !</h1>
+            <p className='text-gray-400 mb-20 md:text-lg'>Now you can bookmark and buy your favorite plants on your phone . it’s available on Playstore !</p>
+            <button className='text-white bg-[#7D916C] hover:bg-[#677759] transition text-lg px-3 py-3'>
             Download for Androind
           </button>
             </div>
-            <img src="/images/phone.png" className='w-[245px]' alt="" />
+            <div  >
+                <img className='w-[150px] md:w-[252px]' src="/images/phone.png" alt="" />
+            </div>
+          
             
           
             
         </motion.div>
       
        
-    </motion.div>
+    </div>
+    </section>
   )
 }
 
