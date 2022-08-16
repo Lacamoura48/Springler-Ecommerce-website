@@ -33,7 +33,7 @@ function TopSelling() {
      }
 
   return (
-    <section className='min-h-screen  px-40 pt-24'>
+    <section className='min-h-screen seconde:px-40 pt-24 px-20'>
         <h1 className='text-black text-4xl'>Top selling</h1>
         <motion.div variants={variants} initial="hidden" whileInView="show" className='flex justify-center items-start pt-14 gap-7 flex-wrap'>
             {plants.map((item, index)=>{
