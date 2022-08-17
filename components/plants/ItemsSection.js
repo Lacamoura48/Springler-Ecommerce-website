@@ -3,7 +3,7 @@ import SectionItem from './SectionItem'
 
 function ItemsSection() {
   return (
-    <div className='flex-3   flex flex-wrap'>
+    <div className='md:flex-3 flex flex-wrap '>
         
             <SectionItem />
             <SectionItem />

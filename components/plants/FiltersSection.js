@@ -1,8 +1,28 @@
 import React from 'react'
+import Link from 'next/link'
 
 function FiltersSection() {
   return (
-    <div className=' text-[#7f7f7f] justify-around flex-1 '>
+    <>
+    <div className='seconde:hidden text-black  flex  text-xl px-1 text-md'>
+        <div className='flex justify-between w-full'>
+        <div className='flex bg-gray-100 py-2 px-4 gap-2 rounded-md cursor-pointer'>
+        <img className='w-5 rotate-180' src="/icons/arrow-icon.svg" ></img>
+            <Link href="/"> 
+           
+                <p>Back</p>
+            </Link></div>
+       
+            <div className='flex bg-gray-100 py-2 px-4 gap-2 rounded-md cursor-pointer'>
+                 <img className='w-5' src="/icons/filters-icon-black.svg" ></img>
+                <p>Filter</p>
+            </div>
+          
+        </div>
+        
+       
+    </div>
+    <div className=' text-[#7f7f7f] justify-around flex-1 seconde:block hidden'>
        
         <div className='p-10 border rounded-md'>
         <div className=' pt-4 pb-10 '>
@@ -30,7 +50,7 @@ function FiltersSection() {
       
         <div className='text-lg mb-10'>
             <p className='text-black text-xl mb-5 font-normal'>Categories</p>
-            <div className='flex gap-4 items-center flex-wrap justify-evenly'>
+            <div className='flex gap-4 items-center flex-wrap'>
                  <div className='flex items-center gap-2'>
                 <input type="checkbox" name="" id="something"/>
                 <label htmlFor="something">Unkillable</label>
@@ -51,10 +71,7 @@ function FiltersSection() {
                 <input type="checkbox" name="" id="something5"/>
                 <label htmlFor="something5">somthing</label>
             </div>
-            <div className='flex items-center gap-2'>
-                <input type="checkbox" name="" id="something6"/>
-                <label htmlFor="something6">sosdfksd</label>
-            </div>
+        
             </div>
            
             
@@ -81,6 +98,7 @@ function FiltersSection() {
 
         </div>
     </div>
+    </>
   )
 }
 

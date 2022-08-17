@@ -73,7 +73,7 @@ function Navbar() {
             Search
           </button>
         </div>
-        <div className={`w-11 h-11 ml-5 border-[0.7px] rounded-full p-3 ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} transition cursor-pointer`}>
+        <div onClick={()=> dispatch(cartActions.showProfile())} className={`w-11 h-11 ml-5 border-[0.7px] rounded-full p-3 ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} transition cursor-pointer`}>
           <img className="w-7" src={scrolled ? '/icons/user-icon-black.svg' : "/icons/user-icon.svg"} alt="" />
         </div>
         <div className="relative">

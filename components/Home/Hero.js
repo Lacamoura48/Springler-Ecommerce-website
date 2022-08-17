@@ -4,7 +4,7 @@ import HeroDiaporama from './HeroDiaporama'
 
 function Hero() {
   return (
-    <section className='min-h-screen w-full bg-[url(/images/background.jpg)] bg-cover bg-no-repeat bg-center relative z-10 flex items-center md:px-36 px-5 pt-20'>
+    <section className='min-h-screen w-full bg-[url(/images/background.jpg)] bg-cover bg-no-repeat bg-center relative z-10 flex items-center md:px-36 px-5 pt-20 pb-10'>
         <div className='absolute top-0 bottom-0 left-0 right-0 bg-[#394231] opacity-[0.65]'></div>
         <div className='z-10 flex justify-around w-full  items-center'>
             <div>

@@ -15,9 +15,9 @@ function Item() {
   }
 
   return (
-    <div className="min-h-screen text-black w-full pt-20 md:flex seconde:px-40 pb-10">
-      <div className="flex flex-col w-full m-5 gap-1 md:flex-1">
-        <div className="">
+    <div className="md:min-h-screen text-black w-full pt-20 md:flex justify-center seconde:px-40 md:pb-10">
+      <div className="flex flex-col w-full px-3 pt-5 gap-1 md:flex-5">
+        <div className="w-full">
           {diapoImages.map((item, index) => {
             return (
               index === imageSelected && (
@@ -60,8 +60,8 @@ function Item() {
           </div>
         </div>
         </div>
-        <div className=" md:flex-2 md:pr-40 md:pl-10 md:pt-10">
-          <div className="flex justify-between items-center px-7 pt-2 mb-10">
+        <div className=" md:flex-7 md:pr-40 md:pl-10 md:pt-10">
+          <div className="flex justify-between items-center px-7 pt-2 mb-10 px-40">
             <div>
               <h1 className="text-3xl seconde:text-5xl">Susie</h1>
               <p className="text-lg seconde:text-xl text-gray-400">Unkillable plant</p>

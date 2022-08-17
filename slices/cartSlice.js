@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const cartInitialState ={
     cartShow : false,
+    profileShow : false,
     cartItems : [
         {id : 1,
         title : "Susie"},
@@ -9,6 +10,7 @@ const cartInitialState ={
         title : "9lwa"},
         {id : 3,
         title : "Susie"},
+        
         
         
     ]
@@ -20,7 +22,11 @@ const cartSlice = createSlice({
     reducers :{
         showCart(state){
             state.cartShow = !state.cartShow
-            console.log(state.cartShow)
+          
+        },
+        showProfile(state){
+            state.profileShow = !state.profileShow
+            
         }
     }
 
