@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import {cartActions} from '../slices/cartSlice';
-import { useDispatch } from "react-redux";
+import {uiActions} from '../slices/uiSlice';
+import { useDispatch, useSelector } from "react-redux";
 import {useRouter} from 'next/router'
 
 
@@ -12,6 +12,9 @@ import {useRouter} from 'next/router'
 
 
 function Navbar() {
+ 
+
+ 
   const router = useRouter()
 
  
@@ -73,12 +76,12 @@ function Navbar() {
             Search
           </button>
         </div>
-        <div onClick={()=> dispatch(cartActions.showProfile())} className={`w-11 h-11 ml-5 border-[0.7px] rounded-full p-3 ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} transition cursor-pointer`}>
+        <div onClick={()=> dispatch(uiActions.showProfile())} className={`w-11 h-11 ml-5 border-[0.7px] rounded-full p-3 ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} transition cursor-pointer`}>
           <img className="w-7" src={scrolled ? '/icons/user-icon-black.svg' : "/icons/user-icon.svg"} alt="" />
         </div>
         <div className="relative">
           
-          <div onClick={()=> dispatch(cartActions.showCart())} className={`w-11 h-11 border-[0.7px] rounded-full p-3 transition ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} cursor-pointer`}>
+          <div onClick={()=> dispatch(uiActions.showCart())} className={`w-11 h-11 border-[0.7px] rounded-full p-3 transition ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} cursor-pointer`}>
             <img className="w-7" src={scrolled ? '/icons/cart-icon-black.svg' : "/icons/cart-icon.svg"} alt="" />
           </div>
 
@@ -86,6 +89,7 @@ function Navbar() {
         </div>
       
       </div>
+
     </nav>
   );
 }

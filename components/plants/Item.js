@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import InfoDrop from "../InfoDrop";
 import { motion } from "framer-motion";
+import Router from "next/router";
+import {addItemToCart} from '../../slices/cartSlice';
+import {useDispatch} from 'react-redux'
 
 function Item() {
+ const dispatch = useDispatch()
+  async function addToCart(){
+    dispatch(addItemToCart({id : 10, title : "halwa", price : 58, quantity : 3, total : 17}))
+    
+  }
   const diapoImages = [
     "/images/plant_back_1.png",
     "/images/plant_back_2.png",
@@ -113,7 +121,7 @@ function Item() {
           </div>
 
           <div className="flex gap-5 mt-16 items-center md:float-right">
-            <button className="flex-auto md:flex-initial md:px-10 md:rounded-md transition  bg-[#7D916C] hover:bg-[#6e805e] text-white border border-[#7D916C] py-5 text-[18px]">
+            <button onClick={addToCart} className="flex-auto md:flex-initial md:px-10 md:rounded-md transition  bg-[#7D916C] hover:bg-[#6e805e] text-white border border-[#7D916C] py-5 text-[18px]">
               Add to cart
             </button>
             <div className=" rounded-full p-2 transition hover:bg-[#7c7c7c2c] cursor-pointer">

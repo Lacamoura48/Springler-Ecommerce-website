@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CartItem from './CartItem'
-import {useEffect} from 'react'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {motion} from "framer-motion"
+import { cartActions, getCartItems } from '../slices/cartSlice'
+import { uiActions } from '../slices/uiSlice'
+import Link from 'next/link'
+
+
 
 function Cart({setShow}) {
-    const cartItems = useSelector(state => state.cart.cartItems)
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(getCartItems())
+  }, [dispatch , cartItems])
+    
+  const cartItems = useSelector(state => state.cart.cartItems)
+
+ 
+  
+ 
+
+
+   
     const animeChildren = {
       hidden : {opacity : 0 , y : -20},
       shown : {opacity : 1, y: 0, transition : {duration : 0.3}}
@@ -23,16 +40,18 @@ function Cart({setShow}) {
             <img className="w-20" src='/icons/remove-icon-black.svg' alt="" />
           </button>
           
-          <div  className={`text-black flex flex-col w-full mt-8 ${cartItems.length > 3 && 'overflow-y-scroll' }  h-[65vh]`}>
+          <div  className={`text-black flex flex-col w-full mt-8 ${cartItems && cartItems.length > 3 && 'overflow-y-scroll' }  h-[65vh]`}>
             
-            {cartItems.map(item=>{
+            {cartItems.length ? cartItems.map(item=>{
                return (<CartItem variants={animeChildren} initial="hidden" animate="shown" item={item} key={item.id}/>)
-            })}
+            }) : <div onClick={setShow} className='text-gray-500 h-full flex flex-col gap-10 justify-center items-center text-3xl text-center'>You still haven&apos;t added anything to the cart yet :&apos;( <Link href="/plants"><button className="md:px-10 md:rounded-md transition  bg-[#7D916C] hover:bg-[#6e805e] text-white border border-[#7D916C] py-5 text-[18px]">
+            View the plants 
+          </button></Link></div> }
           </div>
-          <div className='mt-3 flex justify-between items-center p-3 rounded-md bg-gray-50 '>
-            <button className='px-6 py-4 bg-[#7D916C] text-white md:text-[18px] text-[16px]'>Check out</button>
+         {cartItems.length ? ( <div className='mt-3 flex justify-between items-center p-3 rounded-md bg-gray-50 '>
+            <button onClick={setShow} className='px-6 py-4 bg-[#7D916C] text-white md:text-[18px] text-[16px]'>Check out</button>
             <p className='text-black font-semibold md:text-[20px] text-[17px]'>TOTAL : 106$</p>
-          </div>
+          </div>): ''}
           </motion.div>
   )
 }

@@ -3,7 +3,7 @@ import React from 'react'
 function SectionItem() {
   return (
     <div className=' border-gray-200 md:border-none md:w-1/3 w-1/2 md:p-5 p-1 transition  text-black flex flex-col hover:bg-gray-50 cursor-pointer group'>
-        <img src="/images/plant_1.png" alt="" />
+        <img src="https://res.cloudinary.com/patch-gardens/image/upload/c_fill,f_auto,h_840,q_auto:good,w_840/v1563812091/products/snake-plant-e0fb21.jpg" alt="" />
         <div className='flex justify-between items-center'>
             <div>
             <h1 className='text-lg md:text-2xl -mb-2 group-hover:text-[#7D916C] transition'>Susie</h1>
