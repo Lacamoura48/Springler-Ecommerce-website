@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {motion} from "framer-motion";
 import {useDispatch} from 'react-redux'
-import {cartActions, updateItemFromCart, deleteItemFromCart, getCartItems} from '../slices/cartSlice'
+import {cartActions, updateItemFromCart, deleteItemFromCart} from '../slices/cartSlice'
 
 
 
@@ -43,7 +43,7 @@ function CartItem({ item, variants}) {
   return (
     <motion.div variants={variants} className="flex w-full py-2 px-2 hover:bg-gray-50 rounded-md">
       <div className="flex flex-1">
-        <img src="/images/plant_1.png" className="md:w-32 w-32" alt="" />
+        <img src={item.mainPic} className="md:w-32 w-32" alt="" />
         <div className="pl-2 md:pl-4 flex flex-col md:justify-around justify-start">
           <div>
             <h1 className="text-xl md:text-2xl  -mb-2">{item.title}</h1>

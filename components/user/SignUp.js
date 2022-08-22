@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import {createUserWithEmailAndPassword } from "firebase/auth";
 import {auth, db} from "../../firebase-config"
 import { addDoc, collection } from 'firebase/firestore';
-import { useRouter } from 'next/router'
 import {useSelector} from 'react-redux'
 
 

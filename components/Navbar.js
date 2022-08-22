@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {uiActions} from '../slices/uiSlice';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import {useRouter} from 'next/router'
 
 
@@ -28,9 +28,6 @@ function Navbar() {
     }
   }
   useEffect(() => {
-    
-    
-   
     window.addEventListener("scroll", changeBackground)
     changeBackground()
   })

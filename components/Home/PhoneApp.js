@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {motion} from 'framer-motion'
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../firebase-config';
+
 
 function PhoneApp() {
+  const theEmail = useRef()
+  const [done, setDone] = useState(false)
+  async function submitEmail(){
+    const emailsRef = collection(db, "emails")
+    
+    await addDoc(emailsRef, {email : theEmail.current.value})
+    setDone(true)
+  }
     const parentVariants ={
        hidden :{ opacity : 0},
        shown : { opacity : 1, transition : {staggerChildren : 0.3, delayChildren : 0.3}}
@@ -18,25 +29,27 @@ function PhoneApp() {
   return (
     <section className='md:px-40 md:py-32 py-20'>
     <div className='text-black flex seconde:flex-row seconde:gap-0 gap-28 flex-col  justify-center'>
-          <div variants={childrenVariantsL} initial="hidden" whileInView="shown" className=' seconde:pr-12 seconde:border-r md:text-left text-center mx-auto'>
+          <div className=' seconde:pr-12 seconde:border-r md:text-left text-center mx-auto'>
             <h1 className=' text-2xl md:text-4xl mb-4'>subscribe in our email for more surprises !</h1>
             <p className='text-gray-400 mb-12 text-lg'>subscribe to the newsletter and get all news about new arrivals, sales, and even cupons  !</p>
-            <form className="md:w-96 relative ">
+            <div className="md:w-96 relative ">
           <img
-            className="md:w-6 w-5 absolute md:top-4 md:left-3 top-1 left-8"
+            className={`md:w-6 w-5 absolute md:top-4 md:left-3 top-1 left-8 ${done && 'hidden'}`}
             src="/icons/mail-icon-black.svg"
             alt=""
           />
+          <motion.div initial={{position : 'absolute'}} animate={{width : done ? 56 : 384}} transition={{duration : 0.5}} className={`${!done && 'hidden'} h-14  appearance-none  rounded-full md:text-lg text-md focus:outline-none bg-[#d9d9d927] border-gray-200 text-black focus:bg-[#d9d9d941] placeholder:text-gray-400 hover:bg-[#d9d9d941] focus:border-none`}></motion.div>
           <input
-            className={`h-14 w-full transition-all pl-12 md:pr-20 appearance-none  rounded-full py-3 md:text-lg text-md focus:outline-none bg-[#d9d9d927] border-gray-200 text-black focus:bg-[#d9d9d941] placeholder:text-gray-400 hover:bg-[#d9d9d941] focus:border-none`}
+            className={`${done && 'hidden'} h-14 w-full transition-all pl-12 md:pr-20 appearance-none  rounded-full py-3 md:text-lg text-md focus:outline-none bg-[#d9d9d927] border-gray-200 text-black focus:bg-[#d9d9d941] placeholder:text-gray-400 hover:bg-[#d9d9d941] focus:border-none`}
             id="inline-full-name"
             type="email"
             placeholder="Enter your email adress"
+            ref={theEmail}
           />
-          <button type='submit' className='text-white bg-[#7D916C] hover:bg-[#677759] transition rounded-full absolute px-4 py-3 md:right-1 md:top-1 top-16 right-20'>
+          <button onClick={submitEmail} className={`${done && 'hidden'} text-white bg-[#7D916C] hover:bg-[#677759] transition rounded-full absolute px-4 py-3 md:right-1 md:top-1 top-16 right-20`}>
             Subscribe
           </button>
-        </form>
+        </div>
             </div>
         <div variants={childrenVariantsR} initial="hidden" whileInView="shown" className='flex md:justify-around px-3'>
      

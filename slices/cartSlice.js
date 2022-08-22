@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addDoc, collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import {useEffect, useState} from 'react';
 import { db } from "../firebase-config";
 
 
@@ -31,7 +30,7 @@ export function getCartItems(){
 export function addItemToCart(payload){
     return async ()=>{
         const itemsRefrence = collection(db, 'cartItems');
-        await addDoc(itemsRefrence, {id : payload.id, title : payload.title, price : payload.price, quantity : payload.quantity, total : payload.total})
+        await addDoc(itemsRefrence, {id : payload.id, title : payload.title, price : payload.price, quantity : payload.quantity, total : payload.total, mainPic : payload.mainPic})
        
            
         

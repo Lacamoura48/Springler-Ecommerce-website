@@ -10,14 +10,19 @@ function HeroDiaporama() {
       src : "images/plant_cut_3.png",
       style : 'w-60 absolute -top-10 left-14 z-40 pointer-events-none	',
       title : "Susie",
-      price : "15.99$"},
+      price : "9.99$"},
       
     
     { id:1,
       src : "images/plant_cut_4.png",
       style : 'w-[470px] absolute -top-20 -left-20 z-40 pointer-events-none	',
       title : "Pippa",
-      price : "29.99$"}
+      price : "12.99$"},
+      {id : 2,
+        src : "images/plant_cut_1.png",
+        style : 'w-64 absolute top-36 left-16 z-40 pointer-events-none	',
+        title : "Lyla",
+        price : "7.99$"}
   ]
   const variants = {
     enter: {
@@ -39,7 +44,7 @@ function HeroDiaporama() {
 let [current, setCurrent] = useState(0);
 
 function nextButton(){
-  if(current == 1){
+  if(current == 2){
     setCurrent(0)
   }else {
     setCurrent(current+1)
@@ -48,7 +53,7 @@ function nextButton(){
 }
 function previousButton(){
   if(current == 0){
-    setCurrent(1)
+    setCurrent(2)
   }else {
     setCurrent(current-1)
   }
@@ -79,7 +84,7 @@ function previousButton(){
        
         <motion.p initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} transition={{duration : 2}} className='text-2xl text-[#737373] mb-12'>{plants[current].price}</motion.p>
        
-        <Link href={{ pathname: '/plants/[id]',query: { id: '1' }}} ><button className="transition hover:bg-[#657457] bg-[#7D916C] text-white py-3 px-6 rounded-full text-[20px]">view details</button></Link>
+        <Link href={{ pathname: '/plants/[id]',query: { id: current == 0 ? '1' : current==1 ? '2' : '3' }}} ><button className="transition hover:bg-[#657457] bg-[#7D916C] text-white py-3 px-6 rounded-full text-[20px]">view details</button></Link>
       
        </div>
     

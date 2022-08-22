@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import InfoDrop from "../InfoDrop";
 import { motion } from "framer-motion";
-import Router from "next/router";
+import {useRouter} from "next/router";
 import {addItemToCart} from '../../slices/cartSlice';
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 function Item() {
  const dispatch = useDispatch()
+ const router = useRouter()
+ const item = useSelector(state=> state.items.itemsItems).find((item)=> item.id == router.query.id)
+
   async function addToCart(){
-    dispatch(addItemToCart({id : 10, title : "halwa", price : 58, quantity : 3, total : 17}))
+    dispatch(addItemToCart({id : item.id, title : item.title, price : item.price, quantity : 1, total : item.price, mainPic : item.mainPic}))
     
   }
   const diapoImages = [
-    "/images/plant_back_1.png",
-    "/images/plant_back_2.png",
-    "/images/plant_back_3.png",
+    item.mainPic,
+    item.secPic,
+    item.thirdPic,
   ];
   let [imageSelected, setImageSelected] = useState(0);
 
@@ -71,11 +74,11 @@ function Item() {
         <div className=" md:flex-7 md:pr-40 md:pl-10 md:pt-10">
           <div className="flex justify-between items-center px-7 pt-2 mb-10 px-40">
             <div>
-              <h1 className="text-3xl seconde:text-5xl">Susie</h1>
-              <p className="text-lg seconde:text-xl text-gray-400">Unkillable plant</p>
+              <h1 className="text-3xl seconde:text-5xl">{item.title}</h1>
+              <p className="text-lg seconde:text-xl text-gray-400">{item.type}</p>
             </div>
             <div>
-              <p className="text-2xl seconde:text-4xl text-[#58674c]">18.99$</p>
+              <p className="text-2xl seconde:text-4xl text-[#58674c]">{item.price}$</p>
             </div>
           </div>
 
@@ -108,14 +111,12 @@ function Item() {
           <div className="mt-4 ml-4 flex flex-col">
             <InfoDrop
               titleInfo="Description"
-              descriptionInfo="splfsd'l;flds';flsdlp;g,l;gk,fmgdflg"
+              descriptionInfo={item.description}
               descHeight={200}
             />
             <InfoDrop
-              titleInfo="eref"
-              descriptionInfo="This plant’s latin name, monstera deliciosa, translates as - you’ve probably worked this out - ‘delicious monster’. And isn’t it just. The monster part is likely because of its huge, glossy leaves. The delicious part is because in the wild it bears (apparently) very tasty fruit.
-
-              The reason its leaves have all those holes is because it’s used to growing in jungle shade. It’s an epiphyte, which means it grows in crevices in large trees. The gaps in its leaves allow the available light to reach the lowest foliage. The holes in the leaves develop as the plant grows larger. If you order the smallest, youngest plant, it may arrive without the signature notches in all its leaves. They'll appear as it matures."
+              titleInfo={`how to treat a ${item.type}`}
+              descriptionInfo={item.likes}
               descHeight={200}
             />
           </div>
@@ -124,8 +125,10 @@ function Item() {
             <button onClick={addToCart} className="flex-auto md:flex-initial md:px-10 md:rounded-md transition  bg-[#7D916C] hover:bg-[#6e805e] text-white border border-[#7D916C] py-5 text-[18px]">
               Add to cart
             </button>
-            <div className=" rounded-full p-2 transition hover:bg-[#7c7c7c2c] cursor-pointer">
+            <div className=" rounded-full p-2 transition hover:bg-[#7c7c7c2c] cursor-pointer text-center">
+              
               <img className="w-10" src="/icons/heart-icon-black.svg" alt="" />
+              <p>{item.loves}</p>
             </div>
           </div>
         </div>

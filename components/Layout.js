@@ -7,6 +7,8 @@ import {useSelector, useDispatch} from 'react-redux'
 import {uiActions} from '../slices/uiSlice'
 import {AnimatePresence} from "framer-motion"
 import {signIn} from '../slices/userSlice'
+import {getItems} from '../slices/itemsSlice'
+
 
 function Layout({ children }) {
 
@@ -14,12 +16,16 @@ function Layout({ children }) {
   const profileShow = useSelector(state => state.ui.profileShow)
   const dispatch = useDispatch()
   useEffect(()=>{
+    dispatch(getItems())
+  
+  }, [dispatch])
+  useEffect(()=>{
     const userData = localStorage.getItem("account")
     if(userData){
       const userDataP = JSON.parse(userData) 
       dispatch(signIn(userDataP.email, userDataP.password))
     }
-  })
+  },[])
 
   return (
     <>
