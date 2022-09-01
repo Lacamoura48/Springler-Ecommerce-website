@@ -16,9 +16,9 @@ export function signIn(email, password){
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const userInfos = await getDocs(q)
       userInfos.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.data())
-        dispatch(userSlice.actions.SIGN_IN(doc.data()))
+       
+        dispatch(userSlice.actions.SIGN_IN({...doc.data(),docId : doc.id}))
+
         const localData = JSON.stringify({email : email, password : password})
         localStorage.setItem("account",localData)
       });
@@ -27,8 +27,8 @@ export function signIn(email, password){
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-    //   dispatch(userSlice.actions.SET_ERROR())
-    console.log(errorMessage)
+      dispatch(userSlice.actions.SET_ERROR(errorCode))
+   
     });
   
     }
@@ -50,10 +50,11 @@ export function signthisOut(){
 const initialState = {
     connected : false,
     connectionNote : false,
-    connectionError : false,
+    connectionError : '',
     user : {
         username : '',
-        uid : ''
+        uid : '',
+        wishlist : []
     }
 }
 
@@ -67,18 +68,24 @@ const userSlice = createSlice({
             state.user = {...payload}
             
         },
-        // SET_ERROR(state){
-        //     state.connectionError = true
-        //     setTimeout(()=>{
-        //         state.connectionError = false
-        //     }, 2000)
-        // },
+        SET_ERROR(state, {payload}){
+            state.connectionError = payload
+            
+        },
 
         SIGN_OUT(state){
             state.connected = false
             state.user = {
                 username : '',
                 uid : ''
+            }
+        },
+        ADD_TO_WISH(state, {payload}){
+            if(state.user.wishlist.find((item)=> parseInt(item) == payload)){
+                state.user.wishlist =  state.user.wishlist.filter((item)=> parseInt(item) != payload)
+            }else {
+                state.user.wishlist.push(payload)
+
             }
         }
     }

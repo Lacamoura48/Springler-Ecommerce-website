@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addDoc, collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
+
 
 
 
@@ -15,57 +14,31 @@ const cartInitialState ={
 
     ]
 }
-export function getCartItems(){
-    return async dispatch=>{
-        const itemsRefrence = collection(db, 'cartItems');
-        const itemsDocs = await getDocs(itemsRefrence)
-            const data = [...itemsDocs.docs.map((doc)=>{
-                return {...doc.data(), uid : doc.id}
-              } )]
-              dispatch(cartSlice.actions.SET_CART_ITEMS(data))
-           
-        
-    }
-}
-export function addItemToCart(payload){
-    return async ()=>{
-        const itemsRefrence = collection(db, 'cartItems');
-        await addDoc(itemsRefrence, {id : payload.id, title : payload.title, price : payload.price, quantity : payload.quantity, total : payload.total, mainPic : payload.mainPic})
-       
-           
-        
-    }
-}
-export function deleteItemFromCart(payload){
-    return async ()=>{
-        const itemsRefrence = doc(db, 'cartItems', payload);
-      
-        await deleteDoc(itemsRefrence)
-       
-           
-        
-    }
-}
-export function updateItemFromCart(id, uid, quantity){
-    return async (dispatch)=>{
-        dispatch(cartSlice.actions.SET_ITEM_QUANTITY({id : id, quantity : quantity}))
-        const itemRefrence = doc(db, 'cartItems', uid) 
-        await updateDoc(itemRefrence, {quantity : parseInt(quantity)})
-       
-       
-        
-    }
-}
+
+
 const cartSlice = createSlice({
     name : 'cart',
     initialState : cartInitialState,
     reducers :{
-       
-        SET_CART_ITEMS(state, {payload}){
-                state.cartItems = [...payload]
-              },
+        GET_CART_ITEMS(state){
+            if(localStorage.getItem('cart')){
+                state.cartItems = [...JSON.parse(localStorage.getItem('cart'))]
+            }else {
+                
+                localStorage.setItem('cart', JSON.stringify(state.cartItems))
+            }
+            
+        },
+        ADD_TO_CART(state, {payload}){
+            if(state.cartItems.find((item)=> item.id == payload.id)){
+
+            }
+            state.cartItems.push(payload)
+        },
+        
         SET_ITEM_QUANTITY(state, {payload}){
             state.cartItems = state.cartItems.map((item)=> item.id == payload.id ? {...item, quantity : payload.quantity} : item )
+            localStorage.setItem('cart', JSON.stringify(state.cartItems))
             
               },
 
@@ -73,6 +46,7 @@ const cartSlice = createSlice({
             state.cartItems = state.cartItems.filter(item=>{
                 return item.id != payload
             })
+            localStorage.setItem('cart', JSON.stringify(state.cartItems))
         }
         }
     }

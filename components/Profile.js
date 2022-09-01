@@ -12,6 +12,7 @@ function Profile({setShow}) {
   
   const userConnected = useSelector(state => state.user.connected)
   const user = useSelector(state => state.user.user)
+  
   function signemOut(){
     localStorage.clear()
     dispatch(signthisOut())

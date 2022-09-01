@@ -29,11 +29,21 @@ export function getItems(){
 }
 
 
-export function updateItem(id, uid, loves){
+export function addLove(id, uid, lovess){
     return async (dispatch)=>{
-        dispatch(itemsSlice.actions.SET_ITEM({id : id, loves : loves}))
+        dispatch(itemsSlice.actions.SET_ITEMS({op :1, id : id}))
         const itemRefrence = doc(db, 'items', uid) 
-        await updateDoc(itemRefrence, {loves : parseInt(loves)})
+        await updateDoc(itemRefrence, {loves : lovess + 1})
+       
+       
+        
+    }
+}
+export function retrieveLove(id, uid, lovess){
+    return async (dispatch)=>{
+        dispatch(itemsSlice.actions.SET_ITEMS({op :0, id : id}))
+        const itemRefrence = doc(db, 'items', uid) 
+        await updateDoc(itemRefrence, {loves : lovess - 1})
        
        
         
@@ -48,9 +58,16 @@ const itemsSlice = createSlice({
                 state.itemsItems = [...payload]
               },
         SET_ITEMS(state, {payload}){
-            state.itemsItems = state.itemsItems.map((item)=> item.id == payload.id ? {...item, loves : payload.loves} : item )
+            if(payload.op == 1){
+                state.itemsItems = state.itemsItems.map((item)=> item.id == payload.id ? {...item, loves : item.loves +1} : item )
+
+            } else if (payload.op == 0) {
+                state.itemsItems = state.itemsItems.map((item)=> item.id == payload.id ? {...item, loves : item.loves - 1} : item )
+
+            }
             
               },
+        
 
        
         }

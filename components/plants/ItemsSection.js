@@ -2,7 +2,7 @@ import SectionItem from './SectionItem'
 import {useSelector} from 'react-redux';
 import { useEffect, useState } from 'react';
 
-function ItemsSection({filterss}) {
+function ItemsSection({filterss, search}) {
   
 let storeItems = useSelector(state=> state.items.itemsItems)
 let [itemsToshow, setItemsToshow]=useState(storeItems)
@@ -10,13 +10,24 @@ useEffect(()=>{
   setItemsToshow(storeItems)
 },[storeItems])
 useEffect(()=>{
+  if(search){
+    let itemsTofilter = storeItems
+
+      itemsTofilter = itemsTofilter.filter((item)=>{
+        return item.title.toLowerCase().includes(search) 
+      })
+      setItemsToshow(itemsTofilter)
+
+  }
+},[search])
+useEffect(()=>{
   
   let itemsTofilter = storeItems
   if(filterss){
     
     if(filterss.search){
       itemsTofilter = itemsTofilter.filter((item)=>{
-        return item.title == filterss.search
+        return item.title.toLowerCase().includes(filterss.search.toLowerCase()) 
       })}
   
     if(filterss.min){

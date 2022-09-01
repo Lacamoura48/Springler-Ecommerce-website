@@ -2,14 +2,15 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import {addItemToCart} from '../../slices/cartSlice'
+import {cartActions} from '../../slices/cartSlice'
 
 
 function SectionItem({title, mainPic, type, price, id}) {
   const dispatch = useDispatch()
   const router = useRouter()
-    async function addToCart(){
-      dispatch(addItemToCart({id : id, title : title, price : price, quantity : 1, total : price, mainPic : mainPic}))
+    async function addToCart(event){
+      event.stopPropagation()
+      dispatch(cartActions.ADD_TO_CART({id : id, title : title, price : price, quantity : 1, total : price, mainPic : mainPic}))
       
     }
    

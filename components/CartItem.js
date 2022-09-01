@@ -9,7 +9,7 @@ function CartItem({ item, variants}) {
   let [quantity, setQuantity]= useState(item.quantity);
   useEffect(()=>{
     setQuantity(item.quantity)
-    dispatch(updateItemFromCart(item.id ,item.uid, quantity))
+    dispatch(cartActions.SET_ITEM_QUANTITY({id : item.id , quantity : quantity}))
 
   },[item.quantity, quantity, dispatch])
 
@@ -35,7 +35,7 @@ function CartItem({ item, variants}) {
             dispatch(cartActions.REMOVE_CART_ITEM(item.id))
 
 
-      dispatch(deleteItemFromCart(item.uid))
+     
    
 
     }

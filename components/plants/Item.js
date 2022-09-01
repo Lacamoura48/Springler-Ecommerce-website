@@ -2,17 +2,45 @@ import React, { useState } from "react";
 import InfoDrop from "../InfoDrop";
 import { motion } from "framer-motion";
 import {useRouter} from "next/router";
-import {addItemToCart} from '../../slices/cartSlice';
+import {cartActions} from '../../slices/cartSlice';
+import {userActions} from '../../slices/userSlice';
+import { uiActions } from "../../slices/uiSlice";
+import { addLove, retrieveLove } from "../../slices/itemsSlice";
 import {useDispatch, useSelector} from 'react-redux'
+import { doc, updateDoc} from "firebase/firestore";
+import { db } from "../../firebase-config";
+
 
 function Item() {
  const dispatch = useDispatch()
  const router = useRouter()
  const item = useSelector(state=> state.items.itemsItems).find((item)=> item.id == router.query.id)
+ const userWish = useSelector(state=> state.user.user.wishlist)
+ const userUid = useSelector(state=> state.user.user.docId)
+ const userConnected = useSelector(state=> state.user.connected)
+ 
 
-  async function addToCart(){
-    dispatch(addItemToCart({id : item.id, title : item.title, price : item.price, quantity : 1, total : item.price, mainPic : item.mainPic}))
+  function addToCart(){
+    dispatch(cartActions.ADD_TO_CART({id : item.id, title : item.title, price : item.price, quantity : 1, total : item.price, mainPic : item.mainPic}))
     
+  }
+  async function addToWish(){
+    if(userConnected){
+      const itemRefrence = doc(db, 'users', userUid) 
+      if(userWish.find((item)=> parseInt(item) == router.query.id)){
+        dispatch(userActions.ADD_TO_WISH(router.query.id))
+        await updateDoc(itemRefrence, {wishlist : userWish.filter((item)=> parseInt(item) != router.query.id)})
+        await dispatch(retrieveLove(router.query.id, item.uid, item.loves))
+      }else{
+        dispatch(userActions.ADD_TO_WISH(router.query.id))
+        await updateDoc(itemRefrence, {wishlist : [...userWish, router.query.id]})
+        await dispatch(addLove(router.query.id, item.uid, item.loves))
+  
+      }
+    } else {
+      dispatch(uiActions.showProfile())
+    }
+ 
   }
   const diapoImages = [
     item.mainPic,
@@ -125,9 +153,9 @@ function Item() {
             <button onClick={addToCart} className="flex-auto md:flex-initial md:px-10 md:rounded-md transition  bg-[#7D916C] hover:bg-[#6e805e] text-white border border-[#7D916C] py-5 text-[18px]">
               Add to cart
             </button>
-            <div className=" rounded-full p-2 transition hover:bg-[#7c7c7c2c] cursor-pointer text-center">
+            <div onClick={addToWish} className=" rounded-full p-2 transition hover:bg-[#7c7c7c2c] cursor-pointer text-center">
               
-              <img className="w-10" src="/icons/heart-icon-black.svg" alt="" />
+              {userConnected && userWish.find((item)=> item == router.query.id) ? <img className="w-10" src="/icons/heart-icon-black-filled.svg" alt="" /> : <img className="w-10" src="/icons/heart-icon-black.svg" alt="" />}
               <p>{item.loves}</p>
             </div>
           </div>

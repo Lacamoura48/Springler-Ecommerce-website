@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CartItem from './CartItem'
 import {useSelector, useDispatch} from 'react-redux'
 import {motion} from "framer-motion"
-import { cartActions, getCartItems } from '../slices/cartSlice'
-import { uiActions } from '../slices/uiSlice'
+import { cartActions } from '../slices/cartSlice'
 import Link from 'next/link'
 
 
@@ -11,12 +10,15 @@ import Link from 'next/link'
 function Cart({setShow}) {
   const [total, setTotal] = useState(0)
   const dispatch = useDispatch()
-
-  useEffect(()=>{
-    dispatch(getCartItems())
-  }, [dispatch , cartItems])
-    
+    const userConnected = useSelector(state => state.user.connected)
   const cartItems = useSelector(state => state.cart.cartItems)
+ useEffect(()=>{
+    dispatch(cartActions.GET_CART_ITEMS())
+ }, [])
+  
+
+  
+
   useEffect(()=>{
     if(cartItems[0]){
       console.log(cartItems)
@@ -57,7 +59,7 @@ function Cart({setShow}) {
           </button></Link></div> }
           </div>
          {cartItems.length ? ( <div className='mt-3 flex justify-between items-center p-3 rounded-md bg-gray-50 '>
-            <button onClick={setShow} className='px-6 py-4 bg-[#7D916C] text-white md:text-[18px] text-[16px]'>Check out</button>
+            <Link href={{pathname : userConnected ? '/checkout' : '/login'}}><button onClick={setShow} className='px-6 py-4 bg-[#7D916C] text-white md:text-[18px] text-[16px]'>Check out</button></Link>
             <p className='text-black font-semibold md:text-[20px] text-[17px]'>TOTAL : {total.toFixed(2)}$</p>
           </div>): ''}
           </motion.div>
