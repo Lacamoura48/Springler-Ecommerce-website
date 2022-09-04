@@ -8,7 +8,7 @@ import PayementForm from './PayementForm';
 
 function Payement() {
   
-    const userConnected = useSelector(state => state.user.connected)
+    const [lockPayement, setLockPayement] = useState(true)
     const [total, setTotal] = useState(0)
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -17,7 +17,7 @@ function Payement() {
     const cartItems = useSelector(state => state.cart.cartItems)
     useEffect(()=>{
         if(cartItems[0]){
-          console.log(cartItems)
+          
           const eachTotal = cartItems.map((iteme) => parseInt(iteme.quantity) * parseFloat(iteme.price))
           setTotal(eachTotal.reduce((a,b)=> a+b))
         }
@@ -52,9 +52,9 @@ function Payement() {
   return (
     <div className='min-h-screen w-full text-black flex justify-around items-center'>
         <div className='px-14 py-8 text-xl'>
-         <PayementForm />
+         <PayementForm setUnlock={(t)=> setLockPayement(t)}/>
                 <PayPalScriptProvider options={paypalOptions}>
-            <PayPalButtons   style={{ layout: "vertical", color:"silver" }} createOrder={paypalOrder} onApprove={paypalApprove}/>
+            <PayPalButtons disabled={lockPayement}  style={{ layout: "vertical", color:"silver" }} createOrder={paypalOrder} onApprove={paypalApprove}/>
             </PayPalScriptProvider>
                 <Link href={{pathname : '/plants'}}><button className='border-[0.7px] border-[#7D916C] py-2 px-4 text-[#7D916C] hover:bg-[#7D916C] hover:text-white transition'>Back to Plants</button></Link>
            

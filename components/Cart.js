@@ -21,7 +21,7 @@ function Cart({setShow}) {
 
   useEffect(()=>{
     if(cartItems[0]){
-      console.log(cartItems)
+     
       const eachTotal = cartItems.map((iteme) => parseInt(iteme.quantity) * parseFloat(iteme.price))
       setTotal(eachTotal.reduce((a,b)=> a+b))
     }
