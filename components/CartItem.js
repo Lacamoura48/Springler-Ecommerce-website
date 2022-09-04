@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {motion} from "framer-motion";
 import {useDispatch} from 'react-redux'
-import {cartActions, updateItemFromCart, deleteItemFromCart} from '../slices/cartSlice'
+import {cartActions} from '../slices/cartSlice'
 
 
 
@@ -72,7 +72,7 @@ function CartItem({ item, variants}) {
       </div>
       <div className="flex flex-col justify-between items-end">
         <button onClick={removeItem} className="transition hover:bg-[#7c7c7c2c] p-3 rounded-sm"><img src="/icons/trash-icon-black.svg" className="w-7" alt="" /></button>
-        <p className="ml-10 font-semibold text-lg">total : {item.total} $</p>
+        <p className="ml-10 text-lg">total : <span className=" font-normal">{(item.quantity * item.price ).toFixed(2)} $</span></p>
         
       </div>
      

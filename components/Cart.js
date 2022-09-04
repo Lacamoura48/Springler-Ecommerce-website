@@ -45,12 +45,12 @@ function Cart({setShow}) {
     }
 
   return (
-    <motion.div variants={animeParent} initial="hidden" animate="shown" exit="exit"  className="fixed w-full seconde:w-[570px] z-50 text-black bg-white top-0 right-0 min-h-screen shadow-lg pt-5 px-5 md:px-10">
+    <motion.div variants={animeParent} initial="hidden" animate="shown" exit="exit"  className="fixed w-full seconde:w-[570px] z-50 text-black bg-white top-0 right-0 min-h-screen shadow-lg pt-5 px-5 md:px-8">
           <button onClick={setShow} className={`w-16 h-16  p-3 transition hover:bg-[#7c7c7c2c]`}>
             <img className="w-20" src='/icons/remove-icon-black.svg' alt="" />
           </button>
           
-          <div  className={`text-black flex flex-col w-full mt-8 ${cartItems && cartItems.length > 3 && 'overflow-y-scroll' }  h-[65vh]`}>
+          <div  className={`text-black flex flex-col gap-5 w-full mt-8 ${cartItems && cartItems.length > 3 && 'overflow-y-scroll' }  h-[65vh]`}>
             
             {cartItems.length ? cartItems.map(item=>{
                return (<CartItem variants={animeChildren} initial="hidden" animate="shown" item={item} key={item.id}/>)

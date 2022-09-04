@@ -4,6 +4,7 @@ import {motion} from "framer-motion"
 import Link from 'next/link'
 import {useSelector, useDispatch} from 'react-redux'
 import {signthisOut} from '../slices/userSlice'
+import {uiActions} from '../slices/uiSlice'
 
 
 function Profile({setShow}) {
@@ -12,6 +13,7 @@ function Profile({setShow}) {
   
   const userConnected = useSelector(state => state.user.connected)
   const user = useSelector(state => state.user.user)
+  
   
   function signemOut(){
     localStorage.clear()
@@ -43,7 +45,7 @@ function Profile({setShow}) {
             <motion.div className='px-5 text-xl flex flex-col' variants={animeChildren} initial="hidden" animate="shown">
                          <Link animeChildren href="/"><button className='hover:bg-gray-100 hover:text-[#7D916C] px-4 py-2 rounded-md flex items-center gap-3'><img src="/icons/settings-icon-black.svg" alt="" /> Profile settings</button></Link>
                          <Link href="/"><button className='hover:bg-gray-100 hover:text-[#7D916C] px-4 py-2 rounded-md flex items-center gap-3'><img src="/icons/heart-icon-black.svg" alt="" /> Wishlist</button></Link>
-                         <Link href="/"><button className='hover:bg-gray-100 hover:text-[#7D916C] px-4 py-2 rounded-md flex items-center gap-3'><img src="/icons/cartt-icon-black.svg" alt="" /> Checkout</button></Link>
+                         <Link href={{pathname : userConnected ? '/checkout' : '/login'}}><button onClick={()=> dispatch(uiActions.showProfile())} className='hover:bg-gray-100 hover:text-[#7D916C] px-4 py-2 rounded-md flex items-center gap-3'><img src="/icons/cartt-icon-black.svg" alt="" /> Checkout</button></Link>
                          <Link href="/"><button className='hover:bg-gray-100 hover:text-[#7D916C] px-4 py-2 rounded-md flex items-center gap-3'><img src="/icons/live-chat-icon-black.svg" alt="" /> Contact us</button></Link>
 
                          <button onClick={signemOut} className='hover:bg-red-600 border  border-red-600 mt-10 text-red-600 hover:text-white transition px-4 py-2 rounded-md '>Disconnect</button>

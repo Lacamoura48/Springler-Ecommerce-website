@@ -1,18 +1,45 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {cartActions} from '../../slices/cartSlice'
+import { doc, updateDoc } from 'firebase/firestore'
+import {uiActions} from '../../slices/uiSlice'
+import {userActions} from '../../slices/userSlice'
+import { addLove, retrieveLove } from "../../slices/itemsSlice";
+import { db } from '../../firebase-config'
 
 
 function SectionItem({title, mainPic, type, price, id}) {
+
   const dispatch = useDispatch()
-  const router = useRouter()
+  const userConnected = useSelector(state => state.user.connected)
+  const userUid = useSelector(state => state.user.user.docId)
+  const userWish = useSelector(state => state.user.user.wishlist)
+  const item = useSelector(state=> state.items.itemsItems).find((item)=> item.id == id)
+
     async function addToCart(event){
       event.stopPropagation()
       dispatch(cartActions.ADD_TO_CART({id : id, title : title, price : price, quantity : 1, total : price, mainPic : mainPic}))
       
     }
+    async function addToWish(e){
+      e.stopPropagation()
+      if(userConnected){
+        const itemRefrence = doc(db, 'users', userUid) 
+        if(userWish.find((item)=> parseInt(item) == id)){
+          dispatch(userActions.ADD_TO_WISH(id))
+          await updateDoc(itemRefrence, {wishlist : userWish.filter((item)=> parseInt(item) != id)})
+          await dispatch(retrieveLove(id, item.uid, item.loves))
+        }else{
+          dispatch(userActions.ADD_TO_WISH(id))
+          await updateDoc(itemRefrence, {wishlist : [...userWish, id]})
+          await dispatch(addLove(id, item.uid, item.loves))
+    
+        }
+      } else {
+        dispatch(uiActions.showProfile())
+      }}
    
   
   return (
@@ -29,7 +56,9 @@ function SectionItem({title, mainPic, type, price, id}) {
         <div className='flex gap-5 mt-16 items-center'>
             <button className="flex-auto transition  hover:bg-[#7D916C] md:text-[#7D916C] text-white bg-[#7D916C] md:bg-white hover:text-white border md:border-[#7D916C]  py-2 text-[14px] md:text-[16px] " onClick={addToCart}>Add to cart</button>
             <div className=' rounded-full md:p-2 transition hover:bg-[#7c7c7c2c] cursor-pointer'>
-            <img className="w-6 md:w-7" src='/icons/heart-icon-black.svg' alt="" />
+            {userConnected && userWish.find((item)=> item == id) ? <img onClick={addToWish} className="w-6 md:w-7" src="/icons/heart-icon-black-filled.svg" alt="" /> : <img onClick={addToWish} className="w-6 md:w-7" src="/icons/heart-icon-black.svg" alt="" />}
+ 
+            
           </div>
         </div>
 

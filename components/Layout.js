@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import {useSelector, useDispatch} from 'react-redux'
 import {uiActions} from '../slices/uiSlice'
+
 import {AnimatePresence} from "framer-motion"
 import {signIn} from '../slices/userSlice'
 import {getItems} from '../slices/itemsSlice'
@@ -14,11 +15,12 @@ function Layout({ children }) {
 
   const cartShow = useSelector(state => state.ui.cartShow)
   const profileShow = useSelector(state => state.ui.profileShow)
+
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(getItems())
+  }, [])
   
-  }, [dispatch])
   useEffect(()=>{
     const userData = localStorage.getItem("account")
     if(userData){

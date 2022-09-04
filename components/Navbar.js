@@ -2,9 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {uiActions} from '../slices/uiSlice';
-import { useDispatch} from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import {useRouter} from 'next/router'
-
+import {cartActions} from '../slices/cartSlice'
 
 
 
@@ -16,9 +16,21 @@ function Navbar() {
 
  
   const router = useRouter()
+  const [itemAdded, setItemAdded] = useState(false)
 
- 
+  const cartCount = useSelector((state)=> state.cart.cartItems).length
+  
   const [scrolled, setScrolled] = useState(false);
+  useEffect(()=>{
+    if(cartCount != 0){
+      setItemAdded(true)
+    setTimeout(()=>{
+       setItemAdded(false)
+    }, 1000)
+    }
+    
+   
+  }, [cartCount])
   const changeBackground = () => {
     
     if (window.scrollY >= 100 || router.pathname != "/" ) {
@@ -32,7 +44,9 @@ function Navbar() {
     changeBackground()
   })
   const dispatch = useDispatch()
-
+  useEffect(()=>{
+    dispatch(cartActions.GET_CART_ITEMS())
+  }, [])
 
   return (
     <nav className={`flex  items-center justify-between  md:px-48 px-5 fixed top-0 w-full z-20 ${scrolled && 'bg-[#ffffff] shadow-md'} transition-all`}>
@@ -80,6 +94,9 @@ function Navbar() {
           
           <div onClick={()=> dispatch(uiActions.showCart())} className={`w-11 h-11 border-[0.7px] rounded-full p-3 transition ${scrolled ?'hover:bg-[#7c7c7c2c]':'hover:bg-[#ffffff2c]'} cursor-pointer`}>
             <img className="w-7" src={scrolled ? '/icons/cart-icon-black.svg' : "/icons/cart-icon.svg"} alt="" />
+            {cartCount != 0 && <span className={`absolute text-md -top-[5px] -right-[8px] ${scrolled ? 'bg-[#7D916C]' : 'bg-[#ffffff48]'} ${!scrolled && 'border border-[0.7px] '} text-white rounded-full h-[22px] w-[22px] flex justify-center items-center font-normal`}>{cartCount}</span>}
+            {itemAdded && <span className={`animate-ping absolute text-md -top-[5px] -right-[8px] ${scrolled ? 'bg-[#7D916C]' : 'bg-[#ffffff48]'} ${scrolled ? '' : 'border border-[0.7px] '} text-white rounded-full h-[22px] w-[22px] flex justify-center items-center font-normal`}>{cartCount}</span>}
+
           </div>
 
           

@@ -31,9 +31,15 @@ const cartSlice = createSlice({
         },
         ADD_TO_CART(state, {payload}){
             if(state.cartItems.find((item)=> item.id == payload.id)){
+                state.cartItems.find((item)=> item.id == payload.id).quantity++
+                localStorage.setItem('cart', JSON.stringify(state.cartItems))
+
+            }else {
+               state.cartItems.push(payload)
+               localStorage.setItem('cart', JSON.stringify(state.cartItems))
+
 
             }
-            state.cartItems.push(payload)
         },
         
         SET_ITEM_QUANTITY(state, {payload}){
