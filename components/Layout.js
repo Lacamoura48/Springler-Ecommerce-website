@@ -38,7 +38,6 @@ function Layout({ children }) {
             <AnimatePresence>{profileShow && <Profile setShow={()=> dispatch(uiActions.showProfile())} />}</AnimatePresence>
         </header>
         <main>
-          
             {children}
         </main>
         <footer>
