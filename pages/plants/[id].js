@@ -10,31 +10,37 @@ import { db } from '../../firebase-config'
 function PlantId() {
   const router = useRouter()
   const [items, setItems] = useState([])
+  const [item, setItem] = useState({})
+  const [loading, setLoading] = useState(true)
+  async function getItems(){
+    const itemsRefrence = collection(db, 'items');
+  const itemsDocs = await getDocs(itemsRefrence)
+      setItems([...itemsDocs.docs.map((doc)=>{
+          return {...doc.data(), uid : doc.id}
+        } )])
+        setLoading(false)
+  }
   useEffect(()=>{
-    async function getItems(){
-      const itemsRefrence = collection(db, 'items');
-    const itemsDocs = await getDocs(itemsRefrence)
-        setItems([...itemsDocs.docs.map((doc)=>{
-            return {...doc.data(), uid : doc.id}
-          } )])
-       console.log(items)
-    }
-    getItems()
-    
+     getItems()
+     
   }, [])
+  useEffect(()=>{
+    if(loading == false){
+      setItem(items.find((item)=> item.id == router.query.id))
+  }
+  }, [loading])
   
-   const itemName = items.find((item)=> item.id == router.query.id)
-   console.log(itemName)
+
 
   return (
     <>
     <Head>
-      <title>{itemName.title} | Springler</title>
+      <title>{loading ? 'loading...' : item.title} | Springler</title>
       
     </Head>
   <div>
     <Layout>
-       <Item />
+      {loading? <div className='min-h-screen flex justify-center items-center text-black'><img className='w-56' src="/logoTwo.svg" alt="" /></div> : <Item />}
     </Layout>
   </div>
     
