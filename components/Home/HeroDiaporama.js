@@ -1,45 +1,29 @@
 import React, { useTransition } from 'react'
 import {useState} from 'react';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, animate } from "framer-motion";
 import Link from "next/link"
 
 
 function HeroDiaporama() {
   const plants = [
     {id : 0,
-      src : "images/plant_cut_3.png",
+      src : "https://i.ibb.co/vhSkp2j/plant-cut-3.png",
       style : 'w-60 absolute -top-10 left-14 z-40 pointer-events-none	',
       title : "Susie",
       price : "9.99$"},
       
     
     { id:1,
-      src : "images/plant_cut_4.png",
+      src : "https://i.ibb.co/3rSVgjy/plant-cut-4.png",
       style : 'w-[470px] absolute -top-20 -left-20 z-40 pointer-events-none	',
       title : "Pippa",
       price : "12.99$"},
       {id : 2,
-        src : "images/plant_cut_1.png",
+        src : "https://i.ibb.co/Y3rCd3D/plant-cut-1.png",
         style : 'w-64 absolute top-36 left-16 z-40 pointer-events-none	',
         title : "Lyla",
         price : "7.99$"}
   ]
-  const variants = {
-    enter: {
-        x:  1000,
-        opacity: 0
-      },
-   
-    center: {
-      
-      x: 0,
-      opacity: 1
-    },
-    exit:{
-       
-        x: -1000,
-        opacity: 0
-    }}
 
 let [current, setCurrent] = useState(0);
 
@@ -79,10 +63,10 @@ function previousButton(){
        <div className='absolute right-28 top-[210px] text-black'>
        {plants.map((item, index)=>{
         
-        return (current === item.id && <motion.h1 key={item.id} initial={{opacity : 0, x : -5}} animate={{opacity : 1, x : 0}} exit={{opacity : 0}} transition={{duration : 0.5, ease: "easeOut"}} className='text-5xl mb-1'>{item.title}</motion.h1>)
+        return (current === item.id && <motion.h1 key={item.id} initial={{opacity : 0, x : -50}} animate={{opacity : 1, x : 0}} exit={{opacity : 0}} transition={{duration : 0.5, ease:'backOut', delay: 0.3}} className='text-5xl mb-1'>{item.title}</motion.h1>)
  })}
        
-        <motion.p initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} transition={{duration : 2}} className='text-2xl text-[#737373] mb-12'>{plants[current].price}</motion.p>
+        <motion.p initial={{opacity : 0}} animate={{opacity : 1}} exit={{opacity : 0}} transition={{delay : 0.8}} className='text-2xl text-[#737373] mb-12'>{plants[current].price}</motion.p>
        
         <Link href={{ pathname: '/plants/[id]',query: { id: current == 0 ? '1' : current==1 ? '2' : '3' }}} ><button className="transition hover:bg-[#657457] bg-[#7D916C] text-white py-3 px-6 rounded-full text-[20px]">view details</button></Link>
       

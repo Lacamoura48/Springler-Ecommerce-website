@@ -3,9 +3,14 @@ import {createUserWithEmailAndPassword } from "firebase/auth";
 import {auth, db} from "../../firebase-config"
 import { addDoc, collection } from 'firebase/firestore';
 import {useSelector} from 'react-redux'
+import { signIn } from '../../slices/userSlice';
+import {useDispatch} from 'react-redux'
+import {useRouter} from 'next/router'
 
 
 function SignUp() {
+  const dispatch = useDispatch()
+  const router = useRouter()
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 const [PError, setPError] = useState(false)
@@ -33,6 +38,7 @@ if( username != ''){
     
        const userCol = collection(db, "users")
        await addDoc(userCol, {uid : user.uid, username : username, email : user.email, wishlist :[]})
+       dispatch(signIn(email, password))
     
    
     // ...
@@ -40,6 +46,7 @@ if( username != ''){
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
+    alert(errorMessage)
     // ..
   });
     } else {

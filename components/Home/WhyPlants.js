@@ -11,7 +11,7 @@ function WhyPlants() {
                 <div className=' relative w-72 h-72 rounded-full'>
                 <div className='absolute w-64 h-64 bg-black opacity-10 rounded-full -top-2 -right-2'></div>
             <div className='absolute w-64 h-64 bg-black opacity-10 rounded-full -bottom-2 -left-2'></div>
-                <img className='absolute top-0 left-0 rounded-full' src="/images/plant_back_1.png" alt="" />
+                <img className='absolute top-0 left-0 rounded-full' src="https://res.cloudinary.com/patch-gardens/image/upload/c_fill,f_auto,h_840,q_auto:good,w_840/v1563876772/products/snake-plant-dda326.jpg" alt="" />
           
 
         </div>
