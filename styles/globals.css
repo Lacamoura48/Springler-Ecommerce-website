@@ -19,6 +19,10 @@ body {
   font-size: 16px;
   color : white;
 }
+p::selection, h1::selection, span::selection {
+  background-color: #7D916C !important;
+  color: white !important;
+}
 h1 {
   font-family: 'Yeseva One' !important;
 }

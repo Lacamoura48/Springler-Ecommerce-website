@@ -52,7 +52,7 @@ function Navbar() {
     <nav className={`flex  items-center justify-between  md:px-48 px-5 fixed top-0 w-full z-20 ${scrolled && 'bg-[#ffffff] shadow-md'} transition-all`}>
       
       <div className="flex items-center">
-        {scrolled ? (<img className="w-36 pt-2 mr-16" src="/logoTwo.svg" alt="" />) : (<img className="w-36 pt-2 mr-16" src="/logo.svg" alt="" />)}
+        {scrolled ? (<Link href="/"><img className="w-36 pt-2 mr-16 cursor-pointer" src="/logoTwo.svg" alt="" /></Link>) : (<Link href="/"><img className="w-36 pt-2 mr-16 cursor-pointer" src="/logo.svg" alt="" /></Link>)}
         <ul className="md:flex gap-16  text-[18px] tracking-widest hidden">
           <li className={`relative group ${scrolled && 'text-black'} hover:opacity-100 ${router.pathname === "/" ? 'opacity-100 font-normal' : 'opacity-70'}`}>
             <Link href="/">Home</Link>

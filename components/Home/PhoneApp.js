@@ -59,11 +59,12 @@ function PhoneApp() {
             <h1 className=' text-xl md:text-4xl mb-4'>Use our android app for a different shopping experience !</h1>
             <p className='text-gray-400 md:mb-20 mb-5 md:text-lg'>Now you can bookmark and buy your favorite plants on your phone . it’s available on Playstore !</p>
             <button className='text-white bg-[#7D916C] hover:bg-[#677759] transition text-md md:text-lg md:px-3 px-2 py-3'>
-            Download for Androind
+            Download for Android
           </button>
             </div>
-            <div  >
-                <img className='w-[150px] md:w-[252px]' src="/images/phone.png" alt="" />
+            <div className='relative w-[150px] md:w-[252px] md:h-[495px] overflow-hidden' >
+                <iframe scrolling='no' className='absolute -top-10' width="240px" height="550px" src="https://springler-lacamoura48.vercel.app/plants/1" frameborder="0" loading='lazy'></iframe>
+                <img className='w-[150px] md:w-[252px] absolute pointer-events-none' src="https://i.ibb.co/bWC9zF4/icon-smartphone-i-Phone.png" alt="" />
             </div>
           
             
