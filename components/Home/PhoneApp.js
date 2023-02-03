@@ -63,7 +63,7 @@ function PhoneApp() {
           </button>
             </div>
             <div className='relative w-[150px] md:w-[252px] md:h-[495px] overflow-hidden' >
-                <iframe scrolling='no' className='absolute -top-10' width="240px" height="550px" src="https://springler-lacamoura48.vercel.app/plants/1" frameborder="0" loading='lazy'></iframe>
+                <iframe scrolling='no' className='absolute -top-10' width="240px" height="550px" src="https://springler-lacamoura48.vercel.app/plants/1" frameBorder="0" loading='lazy'></iframe>
                 <img className='w-[150px] md:w-[252px] absolute pointer-events-none' src="https://i.ibb.co/bWC9zF4/icon-smartphone-i-Phone.png" alt="" />
             </div>
           

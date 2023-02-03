@@ -24,10 +24,10 @@ function PlantId() {
      
   }, [])
   useEffect(()=>{
-    if(loading == false){
+    if(items.length != 0){
       setItem(items.find((item)=> item.id == router.query.id))
   }
-  }, [loading])
+  }, [items])
   
 
 
